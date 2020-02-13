@@ -52,6 +52,7 @@
 <br>
 <br>
 <a class="link" href="${pageContext.request.contextPath }/getExcel.jsp">数据下载</a>
+<div class="link">本项目已开源，代码已上传至<a href="https://github.com/Yangself666/2019-nCoVforCuggw">Github</a>。</div>
 
 
 <script type="text/javascript">

@@ -53,6 +53,12 @@ public class ExcelController {
         excelUtils.setSheetName(new String[]{tDate+"工程二队体温信息"});
         excelUtils.setResponse(response);
 
+        response.setHeader("Content-Disposition", "attachment;filename=" + tDate+"工程二队体温信息" + ".xlsx");
+        response.setContentType("application/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+
         excelUtils.exportForExcelsOptimize();
         return "downloadSuccess";
     }
