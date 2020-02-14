@@ -46,7 +46,7 @@ public interface GCDao {
      * 将体温信息存入数据库
      * @param temp
      */
-    @Insert("insert into temp (tDate,tName,mClass,myTemp,faTemp,moTemp) values (#{tDate},#{tName},#{mClass},#{myTemp},#{faTemp},#{moTemp})")
+    @Insert("insert into temp (tDate,tName,mClass,myTemp,faTemp,moTemp,state) values (#{tDate},#{tName},#{mClass},#{myTemp},#{faTemp},#{moTemp},#{state})")
     void addTemp(Temp temp);
 
     /**
