@@ -2,60 +2,40 @@ package cn.yangself.domain;
 
 import java.io.Serializable;
 
-public class Temp implements Serializable {
-    private Integer id ;
-    private String tDate;
-    private String tName ;
-    private String mClass;
+public class ClassResult implements Serializable {
+    private String sName;
+    private String sClass;
     private Double myTemp;
     private Double faTemp;
     private Double moTemp;
     private String state;
 
-    public Temp() {
+    public ClassResult() {
     }
 
-    public Temp(Integer id, String tDate, String tName, String mClass, Double myTemp, Double faTemp, Double moTemp, String state) {
-        this.id = id;
-        this.tDate = tDate;
-        this.tName = tName;
-        this.mClass = mClass;
+    public ClassResult(String sName, String sClass, Double myTemp, Double faTemp, Double moTemp, String state) {
+        this.sName = sName;
+        this.sClass = sClass;
         this.myTemp = myTemp;
         this.faTemp = faTemp;
         this.moTemp = moTemp;
         this.state = state;
     }
 
-    public Integer getId() {
-        return id;
+    public String getsName() {
+        return sName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setsName(String sName) {
+        this.sName = sName;
     }
 
-    public String gettDate() {
-        return tDate;
+    public String getsClass() {
+        return sClass;
     }
 
-    public void settDate(String tDate) {
-        this.tDate = tDate;
-    }
-
-    public String gettName() {
-        return tName;
-    }
-
-    public void settName(String tName) {
-        this.tName = tName;
-    }
-
-    public String getmClass() {
-        return mClass;
-    }
-
-    public void setmClass(String mClass) {
-        this.mClass = mClass;
+    public void setsClass(String sClass) {
+        this.sClass = sClass;
     }
 
     public Double getMyTemp() {
@@ -90,13 +70,12 @@ public class Temp implements Serializable {
         this.state = state;
     }
 
+
     @Override
     public String toString() {
-        return "Temp{" +
-                "id=" + id +
-                ", tDate='" + tDate + '\'' +
-                ", tName='" + tName + '\'' +
-                ", mClass='" + mClass + '\'' +
+        return "ClassResult{" +
+                "sName='" + sName + '\'' +
+                ", sClass='" + sClass + '\'' +
                 ", myTemp=" + myTemp +
                 ", faTemp=" + faTemp +
                 ", moTemp=" + moTemp +

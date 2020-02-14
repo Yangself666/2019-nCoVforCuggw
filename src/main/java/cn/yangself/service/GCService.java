@@ -1,6 +1,7 @@
 package cn.yangself.service;
 
 import cn.yangself.dao.GCDao;
+import cn.yangself.domain.ClassResult;
 import cn.yangself.domain.Result;
 import cn.yangself.domain.Student;
 import cn.yangself.domain.Temp;
@@ -25,6 +26,7 @@ public class GCService {
         GCDao dao = sqlSession.getMapper(GCDao.class);
         //进行查询，查询所有数据
         Temp temp = dao.findByNameFromTemp(tName, mClass);
+        sqlSession.close();
         return temp;
     }
 
@@ -39,6 +41,7 @@ public class GCService {
         GCDao dao = sqlSession.getMapper(GCDao.class);
         //进行查询，查询所有数据
         Student student = dao.findByNameFromStudent(sName, mClass);
+        sqlSession.close();
         return student;
     }
 
@@ -53,6 +56,7 @@ public class GCService {
         GCDao dao = sqlSession.getMapper(GCDao.class);
         //进行查询，查询所有数据
         Temp temp = dao.findByNameFromTempToday(tName, mClass, tDate);
+        sqlSession.close();
         return temp;
     }
 
@@ -96,7 +100,23 @@ public class GCService {
         GCDao dao = sqlSession.getMapper(GCDao.class);
         //进行查询，查询所有数据
         List<Result> result = dao.getDayTemp(tDate);
+        sqlSession.close();
         return result;
+    }
+
+    public List<ClassResult> getDayTempList(String tDate,String mClass) throws IOException {
+        //加载配置文件
+        InputStream in = Resources.getResourceAsStream("mybatis-config.xml");
+        //创建SqlSessionFactory对象
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
+        //创建SqlSession对象
+        SqlSession sqlSession = factory.openSession();
+        //获取到代理对象
+        GCDao dao = sqlSession.getMapper(GCDao.class);
+        //进行查询，查询所有数据
+        List<ClassResult> ClassResult = dao.getDayTempList(tDate,mClass);
+        sqlSession.close();
+        return ClassResult;
     }
 
 }

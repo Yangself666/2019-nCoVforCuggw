@@ -22,4 +22,5 @@
         <package name="cn.yangself.dao"/>
     </mappers>
 
+
 </configuration>

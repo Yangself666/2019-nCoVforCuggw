@@ -17,7 +17,7 @@
             background-color: #f5f6f7;
         }
 
-        h1 {
+        h2 {
             text-align: center;
         }
 
@@ -36,7 +36,7 @@
 
 <body>
 <!--可以进行多次提交，多次提交以最后一次为准-->
-<h1>2016级工程二队体温统计系统</h1>
+<h2>2016级工程二队体温统计系统</h2>
 <form action="${pageContext.request.contextPath }/submitForm" method="post">
     <h4>${msg }</h4>
     姓名：<input type="text" name="tName" value="${tName }" required="required"><br>
@@ -45,13 +45,16 @@
     你的体温：<input type="text" name="myTemp" value="${myTemp } "><br>
     父亲体温：<input type="text" name="faTemp" value="${faTemp } "><br>
     母亲体温：<input type="text" name="moTemp" value="${moTemp } "><br>
+    身体状况：<input type="radio" name="state" value="正常" checked="checked"/>正常
+            <input type="radio" name="state" value="发烧"/>发烧
+            <input type="radio" name="state" value="咳嗽"/>咳嗽
     <input class="subButton" type="submit" value="提交信息">
 </form>
 <br>
 <br>
 <br>
 <br>
-<a class="link" href="${pageContext.request.contextPath }/getExcel.jsp">数据下载</a>
+<a class="link" href="${pageContext.request.contextPath }/getTempList.jsp">数据下载</a>
 <div class="link">本项目已开源，代码已上传至<a href="https://github.com/Yangself666/2019-nCoVforCuggw">Github</a>。</div>
 
 
@@ -59,9 +62,9 @@
     var majors = ["请选择专业", "电气工程及其自动化", "计算机科学与技术", "电子信息工程"];
     var classes = [
         ["请选择班级"],
-        ["电气1601班", "电气1602班", "电气1603班", "电气1604班"],
-        ["计算机1601班", "计算机1602班", "计算机1603班", "计算机1604班"],
-        ["电子1601班"]
+        ["电气1601", "电气1602", "电气1603", "电气1604"],
+        ["计算机1601", "计算机1602", "计算机1603", "计算机1604"],
+        ["电子1601"]
     ];
     window.onload = function () {
         var major = document.getElementById("major");

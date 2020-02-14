@@ -19,7 +19,7 @@ public class GCController {
     private Student student ;
     private Temp toTemp;
     @RequestMapping("submitForm")
-    public String submitForm(Model model, String tName, String major, String mClass, String myTemp, String faTemp, String moTemp){
+    public String submitForm(Model model, String tName, String major, String mClass, String myTemp, String faTemp, String moTemp,String state){
         //这是今天的日期
         String tDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         if (!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",myTemp.trim()) ||!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",faTemp.trim())||!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",moTemp.trim())){
@@ -57,12 +57,12 @@ public class GCController {
                     return "index";
                 }else{
                     //在student里面查询到，创建今天的体温记录
-                    toTemp = new Temp(null,tDate,tName,mClass,myTempI,faTempI,moTempI);
+                    toTemp = new Temp(null,tDate,tName,mClass,myTempI,faTempI,moTempI,state);
                     gcService.addTemp(toTemp);
                     return "success";
                 }
             }
-            toTemp = new Temp(null, tDate, tName, mClass, myTempI, faTempI, moTempI);
+            toTemp = new Temp(null, tDate, tName, mClass, myTempI, faTempI, moTempI,state);
             gcService.alterTemp(toTemp);
             return "success";
         } catch (IOException e) {
