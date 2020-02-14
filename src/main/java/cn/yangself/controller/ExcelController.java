@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.List;
 @Controller
 public class ExcelController {
     @RequestMapping("getExcel")
-    public String getExcel(HttpServletResponse response, Model model, String tDate) throws IOException {
+    public String getExcel(HttpServletRequest request, HttpServletResponse response, Model model, String tDate) throws IOException {
         ExcelUtils excelUtils = ExcelUtils.initialization();
 
         List<List<String[]>> dataLists = new ArrayList<>();
@@ -55,8 +56,7 @@ public class ExcelController {
         excelUtils.setSheetName(new String[]{tDate+"工程二队体温信息"});
         excelUtils.setResponse(response);
 
-        response.setHeader("Content-Disposition", "attachment;filename=" + tDate+"工程二队体温信息" + ".xlsx");
-        response.setContentType("application/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8");
+        response.setContentType("application/x-download");
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
@@ -494,7 +494,7 @@ public class ExcelController {
         excelUtils.setSheetName(new String[]{"电子1601","电气1601","电气1602","电气1603","电气1604","计算机1601","计算机1602","计算机1603","计算机1604"});
         excelUtils.setFileName(fileName);
 
-        response.setContentType("application/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8");
+        response.setContentType("application/x-download");
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
