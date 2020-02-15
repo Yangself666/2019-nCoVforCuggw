@@ -13,6 +13,9 @@
         h4{
             text-align: center;
         }
+        .msg{
+            color: red;
+        }
         form{
             width: 300px;
             margin: 20px auto;
@@ -23,7 +26,7 @@
 <body>
 <h4>请选择想要下载的数据日期</h4>
 <h4>如果您的浏览器不能选择日期，请手动输入。日期格式如：2020-02-13</h4>
-<h4>${dMsg}</h4>
+<h4 class="msg">${dMsg}</h4>
 
 <form action="${pageContext.request.contextPath }/getTempList" method="get">
     <input type="date" name="tDate"/>

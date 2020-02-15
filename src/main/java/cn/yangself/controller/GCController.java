@@ -20,27 +20,62 @@ public class GCController {
     private Temp toTemp;
     @RequestMapping("submitForm")
     public String submitForm(Model model, String tName, String major, String mClass, String myTemp, String faTemp, String moTemp,String state){
+        Double myTempI = null;
+        Double faTempI = null;
+        Double moTempI = null;
+
         //这是今天的日期
         String tDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        if (!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",myTemp.trim()) ||!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",faTemp.trim())||!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",moTemp.trim())){
+        if ("".equals(myTemp.trim())){
             model.addAttribute("tName",tName);
             model.addAttribute("myTemp",myTemp);
             model.addAttribute("faTemp",faTemp);
             model.addAttribute("moTemp",moTemp);
-            model.addAttribute("msg","请填写正确的温度数值！");
+            model.addAttribute("msg","请至少填写本人的体温信息！");
             return "index";
         }
-        if(myTemp == null || faTemp == null || moTemp == null){
+        if(!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",myTemp.trim())){
             model.addAttribute("tName",tName);
             model.addAttribute("myTemp",myTemp);
             model.addAttribute("faTemp",faTemp);
             model.addAttribute("moTemp",moTemp);
-            model.addAttribute("msg","请填写全部的体温信息！");
+            model.addAttribute("msg","请填写正确的温度数字！");
             return "index";
         }
-        Double myTempI = Double.parseDouble(myTemp.trim());
-        Double faTempI = Double.parseDouble(faTemp.trim());
-        Double moTempI = Double.parseDouble(moTemp.trim());
+        myTempI = Double.parseDouble(myTemp.trim());
+        if(!"".equals(faTemp.trim())){
+            if (!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",faTemp.trim())){
+                model.addAttribute("tName",tName);
+                model.addAttribute("myTemp",myTemp);
+                model.addAttribute("faTemp",faTemp);
+                model.addAttribute("moTemp",moTemp);
+                model.addAttribute("msg","请填写正确的温度数值！");
+                return "index";
+            }
+            faTempI = Double.parseDouble(faTemp.trim());
+        }
+        if(!"".equals(moTemp.trim())){
+            if (!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",moTemp.trim())){
+                model.addAttribute("tName",tName);
+                model.addAttribute("myTemp",myTemp);
+                model.addAttribute("faTemp",faTemp);
+                model.addAttribute("moTemp",moTemp);
+                model.addAttribute("msg","请填写正确的温度数值！");
+                return "index";
+            }
+            moTempI = Double.parseDouble(moTemp.trim());
+        }
+        //if (!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",myTemp.trim()) ||!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",faTemp.trim())||!Pattern.matches("[1-9]\\d*.\\d*|0\\.\\d*[1-9]\\d*",moTemp.trim())){
+        //    model.addAttribute("tName",tName);
+        //    model.addAttribute("myTemp",myTemp);
+        //    model.addAttribute("faTemp",faTemp);
+        //    model.addAttribute("moTemp",moTemp);
+        //    model.addAttribute("msg","请填写正确的温度数值！");
+        //    return "index";
+        //}
+
+
+
         try {
             //查询今天有没有记录
             temp = gcService.findByNameFromTempToday(tName, mClass,tDate);
