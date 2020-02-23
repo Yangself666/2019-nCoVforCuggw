@@ -14,7 +14,8 @@ import java.util.List;
 /**
  * 这是体温数据操作的接口
  */
-public interface GCDao {
+
+public interface GcDao {
     /**
      * 从Temp表中按学生姓名和班级查询
      * @return
